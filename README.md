@@ -1,4 +1,4 @@
-# suppress_unhandled
+# suppress-unhandled
 
 Suppress traceback of specified unhandled exceptions, preserve everything else.
 
