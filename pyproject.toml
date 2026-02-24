@@ -1,0 +1,11 @@
+[project]
+name = "suppress-unhandled"
+version = "0.1.0"
+requires-python = ">= 3.10"
+
+[dependency-groups]
+dev = ["cleek", "pytest"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
