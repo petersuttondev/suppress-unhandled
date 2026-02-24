@@ -2,9 +2,14 @@
 name = "suppress-unhandled"
 version = "0.1.0"
 requires-python = ">= 3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+
+[project.urls]
+Homepage = "https://github.com/petersuttondev/suppress-unhandled"
 
 [dependency-groups]
-dev = ["cleek", "pytest"]
+dev = ["build", "cleek", "pytest", "twine"]
 
 [build-system]
 requires = ["hatchling"]
