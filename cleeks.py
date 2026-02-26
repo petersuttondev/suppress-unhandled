@@ -44,8 +44,19 @@ def install() -> None:
 
 
 @task
+def build() -> None:
+    _run('venv/bin/python', '-m', 'build')
+
+
+@task
+def upload() -> None:
+    build_dir = _get_project_dir() / 'dist'
+    _run('venv/bin/twine', 'upload', *build_dir.iterdir())
+
+
+@task
 def uninstall() -> None:
-    _run('venv/bin/pip', 'uninstall', '--yes', 'suppress_unhandled')
+    _run('venv/bin/pip', 'uninstall', '--yes', 'suppress-unhandled')
 
 
 # Utilities →
