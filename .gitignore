@@ -1,3 +1,4 @@
+/.autoenv*
 /.pytest_cache/
 /dist/
 /venv/

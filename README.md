@@ -21,6 +21,50 @@ $
 pip install suppress-unhandled
 ```
 
+## Exception groups
+
+Pass `inspect_groups` to also suppress a group whose contents, however deeply
+nested, are all being suppressed:
+
+```Python
+import asyncio
+from suppress_unhandled import suppress_unhandled
+
+suppress_unhandled(ValueError, inspect_groups=True)
+
+async def some_task():
+    raise ValueError('oh no!')
+
+async def main():
+    async with asyncio.TaskGroup() as group:
+        group.create_task(some_task())
+        group.create_task(some_task())
+
+asyncio.run(main())
+```
+
+```ShellSession
+$ python example.py
+$
+```
+
+`asyncio.TaskGroup` collects both failures into an `ExceptionGroup`, which
+`suppress_unhandled(ValueError)`, without `inspect_groups=True`, will not match:
+
+```ShellSession
+$ python example.py
+  + Exception Group Traceback (most recent call last):
+  ...
+  | ExceptionGroup: unhandled errors in a TaskGroup (2 sub-exceptions)
+  +-+---------------- 1 ----------------
+    | ValueError: oh no!
+    +---------------- 2 ----------------
+    | ValueError: oh no!
+    +------------------------------------
+```
+
+Groups containing anything else are not suppressed and their tracebacks print.
+
 ## Background
 
 `Ctrl+C` is often the normal way to exit a Python program. By default, Python

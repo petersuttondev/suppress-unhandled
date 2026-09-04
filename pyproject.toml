@@ -1,7 +1,7 @@
 [project]
 name = "suppress-unhandled"
-version = "0.2.0"
-requires-python = ">= 3.10"
+version = "0.3.0"
+requires-python = ">= 3.11"
 license = "MIT"
 license-files = ["LICENSE"]
 
