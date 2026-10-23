@@ -1,0 +1,33 @@
+# Maintainer: Peter Sutton <peter@petersutton.dev>
+
+_name=suppress-unhandled
+pkgname="python-$_name"
+pkgver=0.3.1
+pkgrel=1
+pkgdesc='Suppress traceback of specified unhandled exceptions, preserve everything else'
+arch=('any')
+url='https://github.com/petersuttondev/suppress-unhandled'
+license=('MIT')
+depends=(python)
+makedepends=(python-build python-hatchling python-installer)
+checkdepends=(python-pytest)
+source=(
+	"https://files.pythonhosted.org/packages/source/${_name::1}/${_name//-/_}/${_name//-/_}-$pkgver.tar.gz"
+)
+sha256sums=('c0b512be54594fa178561c26ea752c44a98521a7dba21bc2b9a267c842ffe9fe')
+
+build() {
+	cd "${_name//-/_}-$pkgver"
+	python -m build --wheel --no-isolation
+}
+
+package() {
+	cd "${_name//-/_}-$pkgver"
+	python -m installer --destdir="$pkgdir" dist/*.whl
+	install -Dm644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}/"
+}
+
+check() {
+	cd "${_name//-/_}-$pkgver"
+	python -m pytest
+}

@@ -1,9 +1,10 @@
 [project]
 name = "suppress-unhandled"
-version = "0.3.0"
+version = "0.3.1"
 requires-python = ">= 3.11"
 license = "MIT"
 license-files = ["LICENSE"]
+readme = "README.md"
 
 [project.urls]
 Homepage = "https://github.com/petersuttondev/suppress-unhandled"
@@ -14,3 +15,10 @@ dev = ["build", "cleek", "pytest", "twine"]
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/README.md",
+  "/suppress_unhandled",
+  "/suppress_unhandled_test.py",
+]
